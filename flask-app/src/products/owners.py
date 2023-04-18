@@ -5,6 +5,17 @@ from src import db
 
 owners = Blueprint('owners', __name__)
 
+# Edit menu and menu prices
+
+# Add new restaurant and its information
+
+# Veiw a list of competing restaurant 
+
+# Update owner contact information
+
+
+
+
 # Get all the products from the database
 @products.route('/products', methods=['GET'])
 def get_products():
