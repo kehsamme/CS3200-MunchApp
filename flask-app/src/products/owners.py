@@ -6,29 +6,30 @@ from src import db
 owners = Blueprint('owners', __name__)
 
 # Post a photo of their restaurant
-@owners.route('/photos', methods =['POST'])
+@owners.route('/photos/<ResID>', methods =['POST'])
 
-def add_photo(Photo):
+def add_photo(ResID):
 
-    #accsess json data from request object
+    #access json data from request object
     current_app.logger.info('')
     req_data = request.get_json()
     current_app.logger.info(req_data)
     
-    res_id = req_data['ResID']
+    #extracting the variable
+    photo = req_data['Photo']
                      
     #construct insert statement
     
     insert_statement = 'INSERT INTO Photos(ResID, Photo) VALUES ("'
-    insert_statement += res_id + '","' + Photo + ')'
+    insert_statement += ResID + '","' + photo + ')'
                      
     current_app.logger.info(insert_statement)
                      
     #execute query
-    cursor = db.get_db().cursor()
+    cursor = db_munch.get_db().cursor()
     cursor.execute(insert_statement)
     db.get_db().commit()
-    return "Success"
+    return "Success!"
     
 #Get a list of customers who’ve been to the restaurant and their member info
 @owners.route('/members/<ResID>', methods =['GET'])
