@@ -144,14 +144,14 @@ def add_restaurant():
     return "Success"
                      
 # Get a list of competing restaurant 
-@owners.route('/competitors')
+@owners.route('/restaurants/<cuisine>')
 def get_competitor_list():
     cursor = db.get_db().cursor()
     query = '''
         SELECT ResName, Cuisine, PriceRange, Description, Rating
         FROM Restaurants
         ORDER BY rating DESC
-        WHERE 5
+        WHERE Cuisine = 
     '''
     cursor.execute(query)
        # grab the column headers from the returned data
