@@ -5,6 +5,80 @@ from src import db
 
 owners = Blueprint('owners', __name__)
 
+# Post a photo of their restaurant
+@owners.route('/photos', methods =['POST'])
+
+def add_photo(Photo):
+
+    #accsess json data from request object
+    current_app.logger.info('')
+    req_data = request.get_json()
+    current_app.logger.info(req_data)
+    
+    res_id = req_data['ResID']
+                     
+    #construct insert statement
+    
+    insert_statement = 'INSERT INTO Photos(ResID, Photo) VALUES ("'
+    insert_statement += res_id + '","' + Photo + ')'
+                     
+    current_app.logger.info(insert_statement)
+                     
+    #execute query
+    cursor = db.get_db().cursor()
+    cursor.execute(insert_statement)
+    db.get_db().commit()
+    return "Success"
+    
+#Get a list of customers who’ve been to the restaurant and their member info
+@owners.route('/members/<ResID>', methods =['GET'])
+def get_customers(ResID):
+    cursor = db.get_db().cursor()
+    cursor.execute('select Email, FName, LName, Age, PhoneNumber, City, State, NumReviews,\
+                    MemberID from (Restaurants join ReviewPhotos on ResID = ResID) join\
+                    (Members join ReviewPhotos on MemberID = MemberID)'.format(ResID))
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+#Get a list of reviews at the restaurant.
+@owners.route('/retaurant/<ReviewDescription>/<ResID>', methods =['GET'])
+def get_reviews(ResID):
+    cursor = db.get_db().cursor()
+    cursor.execute('select Stars, ReviewDescription, MemberID, ResID\
+                 from (Restaurants join Reviews on ResID = ResID)'.format(ResID))
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+#List of rewards offered by the restaurant
+@owners.route('/rewards/<ResID>', methods =['GET'])
+def get_rewards(ResID):
+    cursor = db.get_db().cursor()
+    cursor.execute('select RewardType, PointsRequired, DatesOffered, ResID\
+                 from (Restaurants join Rewards on ResID = ResID)'.format(ResID))
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 # Edit menu and menu prices
 @owners.route('/restaurants', methods =['POST'])
 
