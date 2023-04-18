@@ -79,6 +79,7 @@ def get_rewards(ResID):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
 # Edit menu and menu prices
 @owners.route('/restaurants', methods =['POST'])
 def add_menu_items():
@@ -88,7 +89,7 @@ def add_menu_items():
     req_data = request.get_json()
     current_app.logger.info(req_data)
     
-    #res_id = req_data['ResID']
+    res_id = req_data['ResID']
     dish_name = req_data['DishName']
     meal_type = req_data['MealType']
     price = req_data['Price]
@@ -96,7 +97,7 @@ def add_menu_items():
     #construct insert statement
     
     insert_statement = 'INSERT INTO Dishes(DishName, MealType, Price) VALUES ("'
-    insert_statement += dish_name + '","' + meal_type + '","' + str(price) + ')'
+    insert_statement += res_id + '","' + dish_name + '","' + meal_type + '","' + str(price) + ')'
                      
     current_app.logger.info(insert_statement)
                      
