@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from src import db
 
@@ -6,10 +6,37 @@ from src import db
 owners = Blueprint('owners', __name__)
 
 # Edit menu and menu prices
+@owners.route('/restaurants', methods =['POST'])
 
-# Add new restaurant and its information
+def add_menu_items():
+    
+    #accsess json data from request object
+    current_app.logger.info('')
+    req_data = request.get_json()
+    current_app.logger.info(req_data)
+    
+    #res_id = req_data['ResID']
+    dish_name = req_data['DishName']
+    meal_type = req_data['MealType']
+    price = req_data['Price]
+                     
+    #construct insert statement
+    
+    insert_statement = 'INSERT INTO Dishes(DishName, MealType, Price) VALUES ("'
+    insert_statement += dish_name + '","' + meal_type + '","' + str(price) + ')'
+                     
+    current_app.logger.info(insert_statement)
+                     
+    #execute query
+    cursor = db.get_db().cursor()
+    cursor.execute(insert_statement)
+    db.get_db().commit()
+    return "Success"
+    
 
-# Veiw a list of competing restaurant 
+# Post new restaurant and its information
+
+# Get a list of competing restaurant 
 
 # Update owner contact information
 
