@@ -81,7 +81,6 @@ def get_rewards(ResID):
     return the_response
 # Edit menu and menu prices
 @owners.route('/restaurants', methods =['POST'])
-
 def add_menu_items():
     
     #accsess json data from request object
@@ -109,49 +108,49 @@ def add_menu_items():
     
 
 # Post new restaurant and its information
-
-# Get a list of competing restaurant 
-
-# Update owner contact information
-
-
-
-
-# Get all the products from the database
-@products.route('/products', methods=['GET'])
-def get_products():
-    # get a cursor object from the database
+@owners.route('/restaurants', methods =['POST'])
+def add_restaurant():
+    
+    #accsess json data from request object
+    current_app.logger.info('')
+    req_data = request.get_json()
+    current_app.logger.info(req_data)
+    
+    res_id = req_data['ResID']
+    res_name = req_data['ResName']
+    owner_id = req_data['OwnerID'] 
+    cuisine = req_data['Cuisine']
+    price_range = req_data['PriceRange'],
+    phone_number = req_data['PhoneNumber'],
+    city = req_data['City'],
+    street = req_data['Street'],
+    state = req_data['State'],
+    zip_code = req_data['Zip'],
+    description = req_data['Descriptions'],
+    rating = req_data['Rating']
+                     
+    #construct insert statement
+    
+    insert_statement = 'INSERT INTO Dishes(ResID, ResName, OwnerID, Cuisine, PriceRange, PhoneNumber, State, City, Street, Zip, Descriptions, Rating) VALUES ("'
+    insert_statement += ResID + '","' + ResName + '","' + OwnerID + '","' + Cusine'","' + PriceRange'","' + PhoneNumber'","' + State'","' + City'","' + Street '","' + Zip'","' + Descriptions'","' + Rating)'
+                     
+    current_app.logger.info(insert_statement)
+                     
+    #execute query
     cursor = db.get_db().cursor()
-
-    # use cursor to query the database for a list of products
-    cursor.execute('SELECT id, product_code, product_name, list_price FROM products')
-
-    # grab the column headers from the returned data
-    column_headers = [x[0] for x in cursor.description]
-
-    # create an empty dictionary object to use in 
-    # putting column headers together with data
-    json_data = []
-
-    # fetch all the data from the cursor
-    theData = cursor.fetchall()
-
-    # for each of the rows, zip the data elements together with
-    # the column headers. 
-    for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
-
-    return jsonify(json_data)
-
-# get the top 5 products from the database
-@products.route('/mostExpensive')
-def get_most_pop_products():
+    cursor.execute(insert_statement)
+    db.get_db().commit()
+    return "Success"
+                     
+# Get a list of competing restaurant 
+@owners.route('/competitors')
+def get_competitor_list():
     cursor = db.get_db().cursor()
     query = '''
-        SELECT product_code, product_name, list_price, reorder_level
-        FROM products
-        ORDER BY list_price DESC
-        LIMIT 5
+        SELECT ResName, Cuisine, PriceRange, Description, Rating
+        FROM Restaurants
+        ORDER BY rating DESC
+        WHERE 5
     '''
     cursor.execute(query)
        # grab the column headers from the returned data
@@ -170,3 +169,7 @@ def get_most_pop_products():
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+                     
+# Update owner contact information
+
+
