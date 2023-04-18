@@ -81,7 +81,7 @@ def get_rewards(ResID):
     the_response.mimetype = 'application/json'
     return the_response
 
-# Edit menu and menu prices
+# Add menu and menu prices
 @owners.route('/restaurants', methods =['POST'])
 def add_menu_items():
     
@@ -152,7 +152,7 @@ def get_competitor_list():
         SELECT ResName, Cuisine, PriceRange, Description, Rating
         FROM Restaurants
         ORDER BY rating DESC
-        WHERE Cuisine = 
+        WHERE Cuisine =  
     '''
     cursor.execute(query)
        # grab the column headers from the returned data
