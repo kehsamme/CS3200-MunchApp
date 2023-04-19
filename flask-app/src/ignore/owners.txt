@@ -188,12 +188,10 @@ def edit_ownership(ResID):
     years = req_data['YearsOwner']
     gender req_data['Gender']
                      
-    #construct insert statement
+    #construct update statement
     
-    update_statement = 'UPDATE Dishes SET (FName = first, LName = last, age = Age, YearsOwner = years, Gender = gender) 
-    update_statement += ' WHERE ResID = {ResID}')
-                     
-                     
+    update_statement = 'UPDATE Dishes SET (FName = first, LName = last, age = Age, YearsOwner = years, Gender = gender) WHERE ResID = {ResID}')
+                                     
     current_app.logger.info(update_statement)
                      
     #execute query
