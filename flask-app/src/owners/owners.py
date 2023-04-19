@@ -81,7 +81,7 @@ def add_restaurant():
     return "Success"
                      
 # Get a list of competing restaurant 
-@owners.route('/competitors')
+@owners.route('/restaurants')
 def get_competitor_list(cuisine):
     cursor = db.get_db().cursor()
     query = '''
