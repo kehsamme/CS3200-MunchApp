@@ -82,13 +82,13 @@ def add_restaurant():
                      
 # Get a list of competing restaurant 
 @owners.route('/competitors')
-def get_competitor_list():
+def get_competitor_list(cuisine):
     cursor = db.get_db().cursor()
     query = '''
         SELECT ResName, Cuisine, PriceRange, Description, Rating
         FROM Restaurants
         ORDER BY rating DESC
-        WHERE 5
+        WHERE Cuisine = {cuisine}
     '''
     cursor.execute(query)
        # grab the column headers from the returned data
@@ -109,7 +109,17 @@ def get_competitor_list():
     return jsonify(json_data)
                      
 # Update owner contact information
-
+@owners.route('/owners/<ResID>')
+def get_competitor_list(ResID):
+    
+ Query = f'''
+        UPDATE Owners
+        SET FName = first, LName = last, YearsOwner = years, Age = age
+        WHERE ResID = {ResID}
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
 
 # Post a photo of their restaurant
 @owners.route('/photos/<ResID>', methods =['POST'])
