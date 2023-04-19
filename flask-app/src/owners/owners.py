@@ -52,8 +52,7 @@ def add_restaurant():
     street = req_data['Street'],
     state = req_data['State'],
     zip_code = req_data['Zip'],
-    description = req_data['Descriptions'],
-    rating = req_data['Rating']
+    description = req_data['Descriptions']
                      
     #construct insert statement
     
@@ -68,8 +67,7 @@ def add_restaurant():
     insert_statement += city + '","' 
     insert_statement += street + '","' 
     insert_statement += zip_code + '","' 
-    insert_statement += description + '","' 
-    insert_statement + rating + ')'
+    insert_statement += description + ')'
     
 
     current_app.logger.info(insert_statement)
