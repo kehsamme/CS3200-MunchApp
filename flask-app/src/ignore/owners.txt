@@ -146,13 +146,13 @@ def add_restaurant():
                      
 # Get a list of competing restaurant 
 @owners.route('/restaurants/<cuisine>')
-def get_competitor_list():
+def get_competitor_list(cuisine):
     cursor = db.get_db().cursor()
     query = '''
         SELECT ResName, Cuisine, PriceRange, Description, Rating
         FROM Restaurants
         ORDER BY rating DESC
-        WHERE Cuisine =  
+        WHERE Cuisine = {cuisine}
     '''
     cursor.execute(query)
        # grab the column headers from the returned data
@@ -172,6 +172,35 @@ def get_competitor_list():
 
     return jsonify(json_data)
                      
-# Update owner contact information
+                     
+# Edit owner contact information
+@owners.route('/owners/<ResID>', methods =['PUT'])
+def edit_ownership(ResID):
+                     
+    #accsess json data from request object
+    current_app.logger.info('')
+    req_data = request.get_json()
+    current_app.logger.info(req_data)
+    
+    first = req_data['FName']
+    last = req_data['LName']
+    age = req_data['Age']
+    years = req_data['YearsOwner']
+    gender req_data['Gender']
+                     
+    #construct insert statement
+    
+    update_statement = 'UPDATE Dishes SET (FName = first, LName = last, age = Age, YearsOwner = years, Gender = gender) 
+    update_statement += ' WHERE ResID = {ResID}')
+                     
+                     
+    current_app.logger.info(update_statement)
+                     
+    #execute query
+    cursor = db.get_db().cursor()
+    cursor.execute(update_statement)
+    db.get_db().commit()
+    return "Success"
+    
 
 
