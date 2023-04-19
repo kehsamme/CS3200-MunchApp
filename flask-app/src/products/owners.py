@@ -146,13 +146,13 @@ def add_restaurant():
                      
 # Get a list of competing restaurant 
 @owners.route('/restaurants/<cuisine>')
-def get_competitor_list():
+def get_competitor_list(cuisine):
     cursor = db.get_db().cursor()
     query = '''
         SELECT ResName, Cuisine, PriceRange, Description, Rating
         FROM Restaurants
         ORDER BY rating DESC
-        WHERE Cuisine =  
+        WHERE Cuisine = {cuisine}
     '''
     cursor.execute(query)
        # grab the column headers from the returned data
@@ -172,6 +172,6 @@ def get_competitor_list():
 
     return jsonify(json_data)
                      
-# Update owner contact information
+# Delete owner contact information
 
 
