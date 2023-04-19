@@ -172,6 +172,33 @@ def get_competitor_list(cuisine):
 
     return jsonify(json_data)
                      
-# Delete owner contact information
+# Edit owner contact information
+@owners.route('/owners', methods =['PUT'])
+def edit_ownership():
+                     
+    #accsess json data from request object
+    current_app.logger.info('')
+    req_data = request.get_json()
+    current_app.logger.info(req_data)
+    
+    FName = req_data['FName']
+    LName = req_data['LName']
+    age = req_data['Age']
+    years = req_data['YearsOwner']
+    gender req_data['Gender']
+                     
+    #construct insert statement
+    
+    update_statement = 'UPDATE Dishes(FName, LName, Age, YearsOwner, Gender) VALUES ("'
+    update_statement += FName + '","' + LName + '","' + str(age) + '","' + str(years) + ","' + gender)')'
+                     
+    current_app.logger.info(update_statement)
+                     
+    #execute query
+    cursor = db.get_db().cursor()
+    cursor.execute(update_statement)
+    db.get_db().commit()
+    return "Success"
+    
 
 
