@@ -116,11 +116,11 @@ def post_new_photo():
 
 
 
-# Get contact info from the restaurant (PhoneNumber)
-@members.route('/Restaurants/<Res_name>', methods=['GET'])
-def get_number(Res_name):
+# Get contact info from the restaurant (PhoneNumber) TESTED AND GOOD
+@members.route('/Restaurants/<ResName>', methods=['GET'])
+def get_number(ResName):
     cursor = db.get_db().cursor()
-    cursor.execute('select PhoneNumber from Restaurants where Res_name = {0}'.format(Res_name))
+    cursor.execute('select ResName, PhoneNumber from Restaurants where ResName = "{res_name}"'.format(res_name = ResName))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -131,35 +131,54 @@ def get_number(Res_name):
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get a list of restaurants and their cuisine type, price range, and rating based on city
-@members.route('/Restaurants/<City>', methods=['GET'])
+# Get a list of restaurants and their cuisine type, price range, and rating based on city TESTED AND GOOD
+@members.route('/resinfo/<City>', methods=['GET'])
 def get_res_info(City):
     cursor = db.get_db().cursor()
-    cursor.execute('select Res_name, Cuisine, PriceRange, Rating from Restaurants where City = {0}'.format(City))
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(jsonify(json_data))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
+    cursor.execute('select City, ResName, Cuisine, PriceRange, Rating from Restaurants where City = "{city}"'.format(city = City))
 
-# Post a rating for a restaurant based on restuarant name
-@members.route('/Restaurants/<Res_name>', methods=['POST'])
-def add_rating(Res_name):
+    # grab the column headers from the returned data
+    column_headers = [x[0] for x in cursor.description]
+
+    # create an empty dictionary object to use in
+    # putting column headers together with data
+    json_data = []
+
+    # fetch all the data from the cursor
+    theData = cursor.fetchall()
+
+    # for each of the rows, zip the data elements together with
+    # the column headers.
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+    return jsonify(json_data)
+
+# Post a review TESTED AND GOOD
+@members.route('/Review/', methods=['POST'])
+def add_rating():
     # collecting the data from the request object
     the_data = request.json
     current_app.logger.info(the_data)
 
     # extracting the variable
-    r_rating = the_data['Rating']
+    stars = the_data['Stars']
+    review_des = the_data['ReviewDescription']
+    member_id = the_data['MemberID']
+    res_id = the_data['ResID']
 
     # constructing the query
-    query = 'insert into Restaurants (Rating) values("'
-    query += r_rating + ')'
+    query = 'insert into Review (Stars, ReviewDescription, MemberID, ResID) values("'
+    query += str(stars) + '", "'
+    query += review_des + '", "'
+    query += str(member_id) + '", '
+    query += str(res_id) + ')'
+
     current_app.logger.info(query)
+
+    # # constructing the query
+    # query = 'insert into Restaurants (Rating) values("'
+    # query += str(r_rating) + ')'
+    # current_app.logger.info(query)
 
     # execute and commit the query
     cursor = db.get_db().cursor()
@@ -168,19 +187,21 @@ def add_rating(Res_name):
 
     return "success!"
 
+#MemberID,Email,FName,LName,Age,PhoneNumber,City,StateName,NumReviews
 # Edit/Update an email address
-@members.route('Members/<Email>', methods=['PUT'])
-def update_email(Email):
-    # collecting the data from the request object
-    the_data = request.json
+@members.route('/members/<MemberID>', methods=['PUT'])
+def update_email(MemberID):
+
+    #access json data from request object
+    current_app.logger.info('')
+    the_data = request.get_json()
     current_app.logger.info(the_data)
 
-    # extracting the variable
     email = the_data['Email']
 
     # constructing the query
-    query = 'update Members (Rating) values("'
-    query += email + ')'
+    query = 'UPDATE Members SET Email = "' + email + '"  WHERE MemberID = "{member_id}"'.format(member_id = MemberID)
+
     current_app.logger.info(query)
 
     # execute and commit the query
@@ -188,4 +209,25 @@ def update_email(Email):
     cursor.execute(query)
     db.get_db(). commit()
 
-    return "success!"
+    return "successfully updated!"
+
+
+
+    # # collecting the data from the request object
+    # the_data = request.json
+    # current_app.logger.info(the_data)
+
+    # # extracting the variable
+    # email = the_data['Email']
+
+    # # constructing the query
+    # query = 'update Members (Rating) values("'
+    # query += Email + ')'
+    # current_app.logger.info(query)
+
+    # # execute and commit the query
+    # cursor = db.get_db().cursor()
+    # cursor.execute(query)
+    # db.get_db(). commit()
+
+    # return "success!"
