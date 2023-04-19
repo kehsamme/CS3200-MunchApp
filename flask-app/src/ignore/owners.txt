@@ -26,7 +26,7 @@ def add_photo(ResID):
     current_app.logger.info(insert_statement)
                      
     #execute query
-    cursor = db_munch.get_db().cursor()
+    cursor = db.get_db().cursor()
     cursor.execute(insert_statement)
     db.get_db().commit()
     return "Success!"
