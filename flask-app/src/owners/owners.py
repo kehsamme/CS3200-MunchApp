@@ -56,7 +56,7 @@ def add_restaurant():
                      
     #construct insert statement
     
-    insert_statement = 'INSERT INTO Dishes(ResID, ResName, OwnerID, Cuisine, PriceRange, PhoneNumber, State, City, Street, Zip, Descriptions, Rating) VALUES ("'
+    insert_statement = 'INSERT INTO Dishes(ResName, OwnerID, Cuisine, PriceRange, PhoneNumber, State, City, Street, Zip, Descriptions) VALUES ("'
     insert_statement += res_id + '","' 
     insert_statement += res_name + '","' 
     insert_statement += owner_id + '","' 
