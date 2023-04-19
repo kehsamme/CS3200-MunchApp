@@ -6,7 +6,7 @@ from src import db
 owners = Blueprint('owners', __name__)
 
 # Edit menu and menu prices
-@owners.route('/restaurants', methods =['POST'])
+@owners.route('/Restaurants', methods =['POST'])
 def add_menu_items():
     
     #accsess json data from request object
@@ -34,7 +34,7 @@ def add_menu_items():
     
 
 # Post new restaurant and its information
-@owners.route('/restaurants', methods =['POST'])
+@owners.route('/Restaurants', methods =['POST'])
 def add_restaurant():
     
     #accsess json data from request object
@@ -79,7 +79,7 @@ def add_restaurant():
     return "Success"
                      
 # Get a list of competing restaurant 
-@owners.route('/restaurants')
+@owners.route('/Restaurants/<cuisine>', methods = ['GET'])
 def get_competitor_list(cuisine):
     cursor = db.get_db().cursor()
     query = '''
@@ -107,7 +107,7 @@ def get_competitor_list(cuisine):
     return jsonify(json_data)
                      
 # Update owner contact information
-@owners.route('/owners/<ResID>')
+@owners.route('/Owners/<ResID>', methods = ['PUT'])
 def update_contact_info(ResID):
 
     query = '''
