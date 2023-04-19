@@ -116,7 +116,7 @@ def post_new_photo():
 
 
 
-# Get contact info from the restaurant (PhoneNumber)
+# Get contact info from the restaurant (PhoneNumber) TESTED AND GOOD
 @members.route('/Restaurants/<ResName>', methods=['GET'])
 def get_number(ResName):
     cursor = db.get_db().cursor()
@@ -131,7 +131,7 @@ def get_number(ResName):
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get a list of restaurants and their cuisine type, price range, and rating based on city
+# Get a list of restaurants and their cuisine type, price range, and rating based on city TESTED AND GOOD
 @members.route('/resinfo/<City>', methods=['GET'])
 def get_res_info(City):
     cursor = db.get_db().cursor()
@@ -153,21 +153,32 @@ def get_res_info(City):
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
 
-
-# Post a rating for a restaurant based on restuarant name
-@members.route('/Restaurants/<Res_name>', methods=['POST'])
-def add_rating(Res_name):
+# Post a review TESTED AND GOOD
+@members.route('/Review/', methods=['POST'])
+def add_rating():
     # collecting the data from the request object
     the_data = request.json
     current_app.logger.info(the_data)
 
     # extracting the variable
-    r_rating = the_data['Rating']
+    stars = the_data['Stars']
+    review_des = the_data['ReviewDescription']
+    member_id = the_data['MemberID']
+    res_id = the_data['ResID']
 
     # constructing the query
-    query = 'insert into Restaurants (Rating) values("'
-    query += r_rating + ')'
+    query = 'insert into Review (Stars, ReviewDescription, MemberID, ResID) values("'
+    query += str(stars) + '", "'
+    query += review_des + '", "'
+    query += str(member_id) + '", '
+    query += str(res_id) + ')'
+
     current_app.logger.info(query)
+
+    # # constructing the query
+    # query = 'insert into Restaurants (Rating) values("'
+    # query += str(r_rating) + ')'
+    # current_app.logger.info(query)
 
     # execute and commit the query
     cursor = db.get_db().cursor()
