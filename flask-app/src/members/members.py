@@ -87,3 +87,57 @@ def add_rating(Res_name):
     db_munch.get_db(). commit()
 
     return "success!"
+
+# Edit/Update an email address
+@members.route('Members/<Email>', method=['PUT'])
+def update_email(Email):
+    # collecting the data from the request object
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    # extracting the variable
+    email = the_data['Email']
+
+    # constructing the query
+    query = 'update Members (Rating) values("'
+    query += r_rating + ')'
+    current_app.logger.info(query)
+
+    # execute and commit the query
+    cursor = db_munch.get_db().cursor()
+    cursor.execute(query)
+    db_munch.get_db(). commit()
+
+    return "success!"
+
+
+
+# CLASS EXAMPLE OF POST
+	@products.route('/product', methods=['POST'])
+def add_new_product():
+
+    # collecting the data from the request object
+    the_data = request.json
+    current_app.logger.info(the_data)
+    
+    # extracting the variable
+    p_name = the_data['product_name']
+    p_descr = the_data['product_description']
+    p_price = the_data['product_price']
+    p_category = the_data['product_category']
+    
+    # constructing the query
+    query = 'insert into products (product_name, description, category, list_price) values ("'
+    query += p_name + '", "'
+    query += p_descr + '", "'
+    query += p_category + '", '
+    query += str(p_price) + ')'
+    current_app.logger.info(query)
+    
+    # execute and commit the query
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db(). commit()
+
+
+    return "success!"
