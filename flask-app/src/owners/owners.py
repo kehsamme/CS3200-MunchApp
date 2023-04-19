@@ -111,8 +111,8 @@ def get_competitor_list(cuisine):
 # Update owner contact information
 @owners.route('/owners/<ResID>')
 def get_competitor_list(ResID):
-    
- Query = f'''
+
+query = f'''
         UPDATE Owners
         SET FName = first, LName = last, YearsOwner = years, Age = age
         WHERE ResID = {ResID}
