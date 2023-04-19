@@ -23,8 +23,31 @@ This repo contains a boilerplate setup for spinning up 3 Docker containers:
 1. Build the images with `docker compose build`
 1. Start the containers with `docker compose up`.  To run in detached mode, run `docker compose up -d`. 
 
+## We have several routes included in out repo that relate to members and restaurant owners
+
+Owners
+- Edit menu and menu prices
+- Post new restaurant and its information
+- Get a list of competing restaurant 
+- Update owner contact information
+- Post a photo of their restaurant
+- Get a list of customers who’ve been to the restaurant and their member info
+- Get a list of reviews at the restaurant
+- List of rewards offered by the restaurant
+
+Members
+- Get location of restaurant based on city
+- Get a list of the top ten highest rated restaurants
+- Post a photo of the food
+- Get contact info from the restaurant (PhoneNumber)
+- Get a list of restaurants and their cuisine type, price range, and rating based on city
+- Post a rating for a restaurant based on restuarant name
+- Edit/Update an email address
+- Get all customers from the DB
+- Get customer detail for customer with particular userID
 
 ## Credits
 @oonafoulser
 @kehsamme
+
 
