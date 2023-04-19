@@ -23,6 +23,7 @@ Version 2.0
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
 CREATE DATABASE IF NOT EXISTS MunchApp;
 
 grant all privileges on MunchApp.* to 'webapp'@'%';
@@ -37,7 +38,6 @@ USE MunchApp;
 -- -----------------------------------------------------
 -- Table `MunchApp`.`Restaurants`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS Restaurants;
 
 CREATE TABLE Restaurants (
   ResID int AUTO_INCREMENT PRIMARY KEY,
@@ -51,15 +51,13 @@ CREATE TABLE Restaurants (
   StateName varchar(50) NOT NULL,
   Zip int NOT NULL,
   Descriptions varchar(1000),
-  Rating int)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  Rating int
+  );
 
 
 -- -----------------------------------------------------
 -- Table `MunchApp`.`Owners`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS Owners;
 
 CREATE TABLE Owners (
   OwnerID int AUTO_INCREMENT NOT NULL,
@@ -68,9 +66,8 @@ CREATE TABLE Owners (
   Age int NOT NULL,
   YearsOwner int,
   Gender varchar(50),
-  FOREIGN KEY (OwnerID) REFERENCES Restaurants(OwnerID))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  FOREIGN KEY (OwnerID) REFERENCES Restaurants(OwnerID)
+  );
 
 
 -- -----------------------------------------------------
@@ -78,18 +75,16 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Photos;
 
-CREATE TABLE Photos (
+CREATE TABLE Photo (
   Photo varchar(200) PRIMARY KEY,
   ResID int NOT NULL,
   FOREIGN KEY (ResID) REFERENCES Restaurants(ResID))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ ;
 
 
 -- -----------------------------------------------------
 -- Table `MunchApp`.`Members`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS Members;
 
 CREATE TABLE Members (
     MemberID int PRIMARY KEY,
@@ -100,28 +95,25 @@ CREATE TABLE Members (
     PhoneNumber varchar(50) NOT NULL UNIQUE,
     City varchar(50) NOT NULL,
     StateName varchar(50) NOT NULL,
-    NumReviews int)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+    NumReviews int
+    );
 
 
 -- -----------------------------------------------------
--- Table `MunchApp`.`Friends`
+-- Table `MunchApp`.`Friend`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS Friends;
 
-CREATE TABLE Friends (
+CREATE TABLE Friend (
   Friend varchar(50),
   MemberID int NOT NULL,
-  FOREIGN KEY (MemberID) REFERENCES Members(MemberID))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+  );
 
 
 -- -----------------------------------------------------
 -- Table `MunchApp`.`Rewards`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS Rewards;
+
 
 CREATE TABLE Rewards (
   PromoCode varchar(50) PRIMARY KEY,
@@ -129,102 +121,93 @@ CREATE TABLE Rewards (
   ReviewsRequired int NOT NULL,
   DatesOffered date,
   ResID int NOT NULL,
-  FOREIGN KEY (ResID) REFERENCES Restaurants(ResID))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  FOREIGN KEY (ResID) REFERENCES Restaurants(ResID)
+  );
 
 
 -- -----------------------------------------------------
 -- Table `MunchApp`.`Dishes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS Dishes;
 
 CREATE TABLE Dishes (
   DishName varchar(50) PRIMARY KEY,
   MealType varchar(50),
   Price int NOT NULL,
   ResID int NOT NULL,
-  FOREIGN KEY (ResID) REFERENCES Restaurants(ResID))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  FOREIGN KEY (ResID) REFERENCES Restaurants(ResID)
+  );
 
 
 -- -----------------------------------------------------
 -- Table `MunchApp`.`Ingredients`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS Ingredients;
+
 
 CREATE TABLE Ingredients (
   Ingredient varchar(50),
   DishName varchar(50) NOT NULL,
-  FOREIGN KEY (DishName) REFERENCES ;(DishName))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+  FOREIGN KEY (DishName) REFERENCES Dishes(DishName)
+);
 
 -- -----------------------------------------------------
--- Table `MunchApp`.`Reviews`
+-- Table `MunchApp`.`Review`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS Reviews;
 
-CREATE TABLE Reviews (
+CREATE TABLE Review (
   Stars int NOT NULL,
   ReviewDescription varchar(1000),
   MemberID int NOT NULL,
   FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
   ResID int NOT NULL,
-  FOREIGN KEY (ResID) REFERENCES Restaurants(ResID))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  FOREIGN KEY (ResID) REFERENCES Restaurants(ResID)
+  );
 
 
 -- -----------------------------------------------------
 -- Table `MunchApp`.`ReviewPhotos`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS ReviewPhotos;
 
 CREATE TABLE ReviewPhotos (
   ReviewPhotos varchar(200) PRIMARY KEY,
   MemberID int NOT NULL,
   FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
   ResID int NOT NULL,
-  FOREIGN KEY (ResID) REFERENCES Restaurants(ResID))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  FOREIGN KEY (ResID) REFERENCES Restaurants(ResID)
+  );
 
 
 
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (1,'Cogidoo',1,'Chinese Cuisine',25,'213-357-7382','California','Los Angeles','4 Sherman Terrace',90081,'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.',2);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (2,'Dynazzy',2,'Indian Cuisine',2,'859-169-2892','Kentucky','Lexington','83 Kingsford Plaza',40510,'In hac habitasse platea dictumst.',29);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (3,'Devpulse',3,'Italian Cuisine',70,'989-205-1569','Michigan','Saginaw','719 Hansons Road',48604,'Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',53);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (4,'Eazzy',4,'Lebanese Cuisine',96,'405-555-3782','Oklahoma','Oklahoma City','5624 Barby Road',73157,'Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus.',19);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (5,'Ooba',5,'Japanese Cuisine',18,'919-454-0341','North Carolina','Raleigh','5 Leroy Place',27635,'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.',36);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (6,'Realblab',6,'Greek Cuisine',42,'405-161-8837','Oklahoma','Oklahoma City','63 Colorado Park',73142,'Phasellus in felis. Donec semper sapien a libero. Nam dui.',89);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (7,'Miboo',7,'American Cuisine',80,'254-735-2391','Texas','Waco','3859 Judy Trail',76711,'Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.',13);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (8,'Fliptune',8,'Mexican Cuisine',33,'859-698-8722','Kentucky','Lexington','6 Paget Avenue',40515,'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus.',44);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (9,'Camido',9,'American Cuisine',20,'202-289-3541','District of Columbia','Washington','816 Parkside Place',20370,'Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',39);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (10,'Jatri',10,'Spanish Cuisine',50,'917-436-1643','New York','Brooklyn','23 4th Trail',11215,'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue.',10);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (11,'Katz',11,'Italian Cuisine',20,'916-252-7391','California','Sacramento','6 Shopko Parkway',95852,'Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.',87);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (12,'Pixonyx',12,'Greek Cuisine',58,'316-631-6216','Kansas','Wichita','855 Anderson Court',67220,'Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum.',7);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (13,'Dynabox',13,'Japanese Cuisine',18,'313-389-5257','Michigan','Detroit','7675 Mosinee Park',48217,'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc.',98);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (14,'Cogidoo',14,'Spanish Cuisine',31,'561-563-9693','Florida','Delray Beach','3931 Buena Vista Parkway',33448,'Proin leo odio, porttitor id, consequat in, consequat ut, nulla.',96);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (15,'Divape',15,'Thai Cuisine',48,'626-719-3333','California','Pasadena','543 Pankratz Park',91131,'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.',12);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (16,'Tazzy',16,'Spanish Cuisine',95,'317-724-3799','Indiana','Indianapolis','25 Lillian Court',46231,'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.',28);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (17,'Quimba',17,'American Cuisine',52,'262-252-7723','Wisconsin','Racine','2288 Bay Trail',53405,'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',51);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (18,'Tagchat',18,'Italian Cuisine',15,'937-952-8734','Ohio','Dayton','02 Luster Junction',45470,'Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.',77);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (19,'Quinu',19,'Greek Cuisine',51,'209-939-2206','California','Fresno','761 Thompson Street',93726,'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat.',43);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (20,'Gabspot',20,'Indian Cuisine',41,'602-549-6485','Arizona','Mesa','5 Alpine Drive',85215,'Aenean fermentum.',92);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (21,'Skimia',21,'Spanish Cuisine',23,'216-861-2906','Ohio','Cleveland','735 Kropf Crossing',44191,'Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy.',48);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (22,'Dablist',22,'Turkey Cuisine',55,'904-473-0449','Florida','Jacksonville','30 Tomscot Parkway',32225,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.',9);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (23,'Tazz',23,'Italian Cuisine',28,'904-943-7417','Florida','Jacksonville','65275 Haas Alley',32225,'Integer tincidunt ante vel ipsum.',19);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (24,'Voonte',24,'Japanese Cuisine',45,'562-808-6058','California','Whittier','601 Bayside Crossing',90610,'Sed ante. Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.',90);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (25,'Midel',25,'Japanese Cuisine',68,'412-849-5793','Pennsylvania','Pittsburgh','31 Buhler Avenue',15279,'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio.',3);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (26,'Fivebridge',26,'Chinese Cuisine',58,'256-945-4060','Alabama','Gadsden','1424 Anhalt Pass',35905,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue.',61);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (27,'Dabvine',27,'Mexican Cuisine',43,'707-283-6305','California','Santa Rosa','5356 New Castle Junction',95405,'Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis.',98);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (28,'Eabox',28,'French Cuisine',90,'256-233-0008','Alabama','Gadsden','77247 Blaine Street',35905,'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',14);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (29,'Feedmix',29,'French Cuisine',17,'510-611-8985','California','Sacramento','4721 Kenwood Street',95823,'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.',58);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (30,'Shufflester',30,'French Cuisine',68,'972-656-4420','Texas','Dallas','49 Miller Circle',75231,'Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque.',1);
-INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES (31,'Gigaclub',31,'Italian Cuisine',78,'405-164-3136','Oklahoma','Oklahoma City','86 Morning Crossing',73157,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',76);
+INSERT INTO Restaurants(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,StateName,City,Street,Zip,Descriptions,Rating) VALUES 
+(1,'Cogidoo',1,'Chinese Cuisine',25,'213-357-7382','California','Los Angeles','4 Sherman Terrace',90081,'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.',2),
+(2,'Dynazzy',2,'Indian Cuisine',2,'859-169-2892','Kentucky','Lexington','83 Kingsford Plaza',40510,'In hac habitasse platea dictumst.',29),
+(3,'Devpulse',3,'Italian Cuisine',70,'989-205-1569','Michigan','Saginaw','719 Hansons Road',48604,'Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',53),
+(4,'Eazzy',4,'Lebanese Cuisine',96,'405-555-3782','Oklahoma','Oklahoma City','5624 Barby Road',73157,'Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus.',19),
+(5,'Ooba',5,'Japanese Cuisine',18,'919-454-0341','North Carolina','Raleigh','5 Leroy Place',27635,'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.',36),
+(6,'Realblab',6,'Greek Cuisine',42,'405-161-8837','Oklahoma','Oklahoma City','63 Colorado Park',73142,'Phasellus in felis. Donec semper sapien a libero. Nam dui.',89),
+(7,'Miboo',7,'American Cuisine',80,'254-735-2391','Texas','Waco','3859 Judy Trail',76711,'Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.',13),
+(8,'Fliptune',8,'Mexican Cuisine',33,'859-698-8722','Kentucky','Lexington','6 Paget Avenue',40515,'Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus.',44),
+(9,'Camido',9,'American Cuisine',20,'202-289-3541','District of Columbia','Washington','816 Parkside Place',20370,'Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',39),
+(10,'Jatri',10,'Spanish Cuisine',50,'917-436-1643','New York','Brooklyn','23 4th Trail',11215,'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue.',10),
+(11,'Katz',11,'Italian Cuisine',20,'916-252-7391','California','Sacramento','6 Shopko Parkway',95852,'Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.',87),
+(12,'Pixonyx',12,'Greek Cuisine',58,'316-631-6216','Kansas','Wichita','855 Anderson Court',67220,'Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum.',7),
+(13,'Dynabox',13,'Japanese Cuisine',18,'313-389-5257','Michigan','Detroit','7675 Mosinee Park',48217,'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc.',98),
+(14,'Cogidoo',14,'Spanish Cuisine',31,'561-563-9693','Florida','Delray Beach','3931 Buena Vista Parkway',33448,'Proin leo odio, porttitor id, consequat in, consequat ut, nulla.',96),
+(15,'Divape',15,'Thai Cuisine',48,'626-719-3333','California','Pasadena','543 Pankratz Park',91131,'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.',12),
+(16,'Tazzy',16,'Spanish Cuisine',95,'317-724-3799','Indiana','Indianapolis','25 Lillian Court',46231,'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.',28),
+(17,'Quimba',17,'American Cuisine',52,'262-252-7723','Wisconsin','Racine','2288 Bay Trail',53405,'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',51),
+(18,'Tagchat',18,'Italian Cuisine',15,'937-952-8734','Ohio','Dayton','02 Luster Junction',45470,'Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.',77),(19,'Quinu',19,'Greek Cuisine',51,'209-939-2206','California','Fresno','761 Thompson Street',93726,'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat.',43), 
+(20,'Gabspot',20,'Indian Cuisine',41,'602-549-6485','Arizona','Mesa','5 Alpine Drive',85215,'Aenean fermentum.',92), 
+(21,'Skimia',21,'Spanish Cuisine',23,'216-861-2906','Ohio','Cleveland','735 Kropf Crossing',44191,'Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy.',48),
+(22,'Dablist',22,'Turkey Cuisine',55,'904-473-0449','Florida','Jacksonville','30 Tomscot Parkway',32225,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.',9),
+(23,'Tazz',23,'Italian Cuisine',28,'904-943-7417','Florida','Jacksonville','65275 Haas Alley',32225,'Integer tincidunt ante vel ipsum.',19),
+(24,'Voonte',24,'Japanese Cuisine',45,'562-808-6058','California','Whittier','601 Bayside Crossing',90610,'Sed ante. Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.',90),
+(25,'Midel',25,'Japanese Cuisine',68,'412-849-5793','Pennsylvania','Pittsburgh','31 Buhler Avenue',15279,'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio.',3),
+(26,'Fivebridge',26,'Chinese Cuisine',58,'256-945-4060','Alabama','Gadsden','1424 Anhalt Pass',35905,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue.',61),
+(27,'Dabvine',27,'Mexican Cuisine',43,'707-283-6305','California','Santa Rosa','5356 New Castle Junction',95405,'Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis.',98),
+(28,'Eabox',28,'French Cuisine',90,'256-233-0008','Alabama','Gadsden','77247 Blaine Street',35905,'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',14),
+(29,'Feedmix',29,'French Cuisine',17,'510-611-8985','California','Sacramento','4721 Kenwood Street',95823,'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.',58),
+(30,'Shufflester',30,'French Cuisine',68,'972-656-4420','Texas','Dallas','49 Miller Circle',75231,'Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque.',1),
+(31,'Gigaclub',31,'Italian Cuisine',78,'405-164-3136','Oklahoma','Oklahoma City','86 Morning Crossing',73157,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',76);
 
 
 #
@@ -579,7 +562,7 @@ INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/159x100.png/cc0000/ffffff',6,31);
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/129x100.png/cc0000/ffffff',11,29);
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/141x100.png/5fa2dd/ffffff',7,27);
-INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/124x100.png/dddddd/000000',19,20);
+INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/124x100.png/dddddd/000001',19,20);
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/110x100.png/ff4444/ffffff',22,33);
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/194x100.png/cc0000/ffffff',24,13);
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/211x100.png/5fa2dd/ffffff',27,19);
@@ -589,7 +572,7 @@ INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/243x100.png/dddddd/000000',4,25);
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/186x100.png/dddddd/000000',3,35);
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/173x100.png/dddddd/000000',1,17);
-INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/115x100.png/dddddd/000000',9,30);
+INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/115x100.png/dddddd/000001',9,30);
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/160x100.png/cc0000/ffffff',30,14);
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/170x100.png/ff4444/ffffff',17,28);
 INSERT INTO ReviewPhotos(ReviewPhotos,MemberID,ResID) VALUES ('http://dummyimage.com/162x100.png/cc0000/ffffff',21,18);
