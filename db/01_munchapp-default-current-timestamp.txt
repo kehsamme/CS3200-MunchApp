@@ -3,9 +3,9 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 
 USE `MunchApp`;
 
-#
-# Dumping data for table 'Restaurants'
-#
+
+-- # Dumping data for table 'Restaurants'
+
 
 INSERT INTO 'Restaurants'(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,State,City,Street,Zip,Descriptions,Rating) VALUES (1,'Cogidoo',1,'Chinese Cuisine',25,'213-357-7382','California','Los Angeles','4 Sherman Terrace',90081,'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.',2);
 INSERT INTO 'Restaurants'(ResID,ResName,OwnerID,Cuisine,PriceRange,PhoneNumber,State,City,Street,Zip,Descriptions,Rating) VALUES (2,'Dynazzy',2,'Indian Cuisine',2,'859-169-2892','Kentucky','Lexington','83 Kingsford Plaza',40510,'In hac habitasse platea dictumst.',29);

@@ -52,12 +52,11 @@ def add_restaurant():
     street = req_data['Street'],
     state = req_data['State'],
     zip_code = req_data['Zip'],
-    description = req_data['Descriptions'],
-    rating = req_data['Rating']
+    description = req_data['Descriptions']
                      
     #construct insert statement
     
-    insert_statement = 'INSERT INTO Dishes(ResID, ResName, OwnerID, Cuisine, PriceRange, PhoneNumber, State, City, Street, Zip, Descriptions, Rating) VALUES ("'
+    insert_statement = 'INSERT INTO Dishes(ResName, OwnerID, Cuisine, PriceRange, PhoneNumber, State, City, Street, Zip, Descriptions) VALUES ("'
     insert_statement += res_id + '","' 
     insert_statement += res_name + '","' 
     insert_statement += owner_id + '","' 
@@ -68,8 +67,7 @@ def add_restaurant():
     insert_statement += city + '","' 
     insert_statement += street + '","' 
     insert_statement += zip_code + '","' 
-    insert_statement += description + '","' 
-    insert_statement + rating + ')'
+    insert_statement += description + ')'
     
 
     current_app.logger.info(insert_statement)
@@ -81,14 +79,14 @@ def add_restaurant():
     return "Success"
                      
 # Get a list of competing restaurant 
-@owners.route('/competitors')
-def get_competitor_list():
+@owners.route('/restaurants')
+def get_competitor_list(cuisine):
     cursor = db.get_db().cursor()
     query = '''
         SELECT ResName, Cuisine, PriceRange, Description, Rating
         FROM Restaurants
         ORDER BY rating DESC
-        WHERE 5
+        WHERE Cuisine = {cuisine}
     '''
     cursor.execute(query)
        # grab the column headers from the returned data
@@ -109,7 +107,17 @@ def get_competitor_list():
     return jsonify(json_data)
                      
 # Update owner contact information
+@owners.route('/owners/<ResID>')
+def update_contact_info(ResID):
 
+    query = '''
+        UPDATE Owners
+        SET FName = first, LName = last, YearsOwner = years, Age = age
+        WHERE ResID = {ResID}
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
 
 # Post a photo of their restaurant
 @owners.route('/photos/<ResID>', methods =['POST'])
