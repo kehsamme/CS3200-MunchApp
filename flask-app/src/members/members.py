@@ -132,19 +132,27 @@ def get_number(ResName):
     return the_response
 
 # Get a list of restaurants and their cuisine type, price range, and rating based on city
-@members.route('/Restaurants/<City>', methods=['GET'])
+@members.route('/resinfo/<City>', methods=['GET'])
 def get_res_info(City):
     cursor = db.get_db().cursor()
-    cursor.execute('select City, Res_name, Cuisine, PriceRange, Rating from Restaurants where City = {city}'.format(city = City))
-    row_headers = [x[0] for x in cursor.description]
+    cursor.execute('select City, ResName, Cuisine, PriceRange, Rating from Restaurants where City = "{city}"'.format(city = City))
+
+    # grab the column headers from the returned data
+    column_headers = [x[0] for x in cursor.description]
+
+    # create an empty dictionary object to use in
+    # putting column headers together with data
     json_data = []
+
+    # fetch all the data from the cursor
     theData = cursor.fetchall()
+
+    # for each of the rows, zip the data elements together with
+    # the column headers.
     for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(jsonify(json_data))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
+        json_data.append(dict(zip(column_headers, row)))
+    return jsonify(json_data)
+
 
 # Post a rating for a restaurant based on restuarant name
 @members.route('/Restaurants/<Res_name>', methods=['POST'])
