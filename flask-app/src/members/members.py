@@ -187,19 +187,21 @@ def add_rating():
 
     return "success!"
 
+#MemberID,Email,FName,LName,Age,PhoneNumber,City,StateName,NumReviews
 # Edit/Update an email address
-@members.route('Members/<Email>', methods=['PUT'])
-def update_email(Email):
-    # collecting the data from the request object
-    the_data = request.json
+@members.route('/members/<MemberID>', methods=['PUT'])
+def update_email(MemberID):
+
+    #access json data from request object
+    current_app.logger.info('')
+    the_data = request.get_json()
     current_app.logger.info(the_data)
 
-    # extracting the variable
     email = the_data['Email']
 
     # constructing the query
-    query = 'update Members (Rating) values("'
-    query += Email + ')'
+    query = 'UPDATE Members SET Email = "' + email + '"  WHERE MemberID = "{member_id}"'.format(member_id = MemberID)
+
     current_app.logger.info(query)
 
     # execute and commit the query
@@ -207,4 +209,25 @@ def update_email(Email):
     cursor.execute(query)
     db.get_db(). commit()
 
-    return "success!"
+    return "successfully updated!"
+
+
+
+    # # collecting the data from the request object
+    # the_data = request.json
+    # current_app.logger.info(the_data)
+
+    # # extracting the variable
+    # email = the_data['Email']
+
+    # # constructing the query
+    # query = 'update Members (Rating) values("'
+    # query += Email + ')'
+    # current_app.logger.info(query)
+
+    # # execute and commit the query
+    # cursor = db.get_db().cursor()
+    # cursor.execute(query)
+    # db.get_db(). commit()
+
+    # return "success!"
