@@ -23,7 +23,7 @@ This repo contains a boilerplate setup for spinning up 3 Docker containers:
 1. Build the images with `docker compose build`
 1. Start the containers with `docker compose up`.  To run in detached mode, run `docker compose up -d`. 
 
-## We have several routes include in out repo
+## We have several routes included in out repo that relate to members and restaurant owners
 
 Owners
 - Edit menu and menu prices
