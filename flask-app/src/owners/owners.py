@@ -108,7 +108,7 @@ def get_competitor_list(cuisine):
                      
 # Update owner contact information
 @owners.route('/owners/<ResID>')
-def get_competitor_list(ResID):
+def update_contact_info(ResID):
 
 query = f'''
         UPDATE Owners
