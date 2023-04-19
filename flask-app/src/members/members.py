@@ -117,9 +117,9 @@ def post_new_photo():
 
 
 # Get contact info from the restaurant (PhoneNumber)
-@members.route('/Restaurants/<Res_name>', method=['GET'])
+@members.route('/Restaurants/<Res_name>', methods=['GET'])
 def get_number(Res_name):
-    cursor = db_munch.get_db().cursor()
+    cursor = db.get_db().cursor()
     cursor.execute('select PhoneNumber from Restaurants where Res_name = {0}'.format(Res_name))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -132,9 +132,9 @@ def get_number(Res_name):
     return the_response
 
 # Get a list of restaurants and their cuisine type, price range, and rating based on city
-@members.route('/Restaurants/<City>', method=['GET'])
+@members.route('/Restaurants/<City>', methods=['GET'])
 def get_res_info(City):
-    cursor = db_munch.get_db().cursor()
+    cursor = db.get_db().cursor()
     cursor.execute('select Res_name, Cuisine, PriceRange, Rating from Restaurants where City = {0}'.format(City))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -147,7 +147,7 @@ def get_res_info(City):
     return the_response
 
 # Post a rating for a restaurant based on restuarant name
-@members.route('/Restaurants/<Res_name>', method=['POST'])
+@members.route('/Restaurants/<Res_name>', methods=['POST'])
 def add_rating(Res_name):
     # collecting the data from the request object
     the_data = request.json
@@ -162,14 +162,14 @@ def add_rating(Res_name):
     current_app.logger.info(query)
 
     # execute and commit the query
-    cursor = db_munch.get_db().cursor()
+    cursor = db.get_db().cursor()
     cursor.execute(query)
-    db_munch.get_db(). commit()
+    db.get_db(). commit()
 
     return "success!"
 
 # Edit/Update an email address
-@members.route('Members/<Email>', method=['PUT'])
+@members.route('Members/<Email>', methods=['PUT'])
 def update_email(Email):
     # collecting the data from the request object
     the_data = request.json
@@ -180,44 +180,12 @@ def update_email(Email):
 
     # constructing the query
     query = 'update Members (Rating) values("'
-    query += r_rating + ')'
+    query += email + ')'
     current_app.logger.info(query)
 
     # execute and commit the query
-    cursor = db_munch.get_db().cursor()
+    cursor = db.get_db().cursor()
     cursor.execute(query)
-    db_munch.get_db(). commit()
+    db.get_db(). commit()
 
     return "success!"
-
-
-
-# CLASS EXAMPLE OF POST
-	@products.route('/product', methods=['POST'])
-def add_new_product():
-
-    # collecting the data from the request object
-    the_data = request.json
-    current_app.logger.info(the_data)
-    
-    # extracting the variable
-    p_name = the_data['product_name']
-    p_descr = the_data['product_description']
-    p_price = the_data['product_price']
-    p_category = the_data['product_category']
-    
-    # constructing the query
-    query = 'insert into products (product_name, description, category, list_price) values ("'
-    query += p_name + '", "'
-    query += p_descr + '", "'
-    query += p_category + '", '
-    query += str(p_price) + ')'
-    current_app.logger.info(query)
-    
-    # execute and commit the query
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db(). commit()
-
-
-    return "success!"

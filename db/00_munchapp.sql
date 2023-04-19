@@ -4,13 +4,17 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 DROP SCHEMA IF EXISTS `MunchApp` ;
 CREATE SCHEMA IF NOT EXISTS `MunchApp` DEFAULT CHARACTER SET latin1 ;
+
+grant all privileges on MunchApp.* to 'webapp'@'%';
+flush privileges;
+
 USE `MunchApp` ;
 
 -- -----------------------------------------------------
 -- Table `MunchApp`.`Restaurants`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MunchApp`.`Restaurants` (
-  'ResID' int PRIMARY KEY,
+  'ResID' int AUTO_INCREMENT PRIMARY KEY,
   'ResName' varchar(50) NOT NULL,
   'OwnerID' int NOT NULL UNIQUE,
   'Cuisine' varchar(50) NOT NULL,
@@ -30,7 +34,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `MunchApp`.`Owners`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MunchApp`.`Owners` (
-  'OwnerID' int NOT NULL,
+  'OwnerID' int AUTO_INCREMENT NOT NULL,
   'FName' varchar(50) NOT NULL,
   'LName' varchar(50) NOT NULL,
   'Age' int NOT NULL,
