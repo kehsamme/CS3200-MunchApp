@@ -117,10 +117,10 @@ def post_new_photo():
 
 
 # Get contact info from the restaurant (PhoneNumber)
-@members.route('/Restaurants/<Res_name>', methods=['GET'])
-def get_number(Res_name):
+@members.route('/Restaurants/<ResName>', methods=['GET'])
+def get_number(ResName):
     cursor = db.get_db().cursor()
-    cursor.execute('select PhoneNumber from Restaurants where Res_name = {0}'.format(Res_name))
+    cursor.execute('select ResName, PhoneNumber from Restaurants where ResName = "{res_name}"'.format(res_name = ResName))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -135,7 +135,7 @@ def get_number(Res_name):
 @members.route('/Restaurants/<City>', methods=['GET'])
 def get_res_info(City):
     cursor = db.get_db().cursor()
-    cursor.execute('select Res_name, Cuisine, PriceRange, Rating from Restaurants where City = {0}'.format(City))
+    cursor.execute('select City, Res_name, Cuisine, PriceRange, Rating from Restaurants where City = {city}'.format(city = City))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -180,7 +180,7 @@ def update_email(Email):
 
     # constructing the query
     query = 'update Members (Rating) values("'
-    query += email + ')'
+    query += Email + ')'
     current_app.logger.info(query)
 
     # execute and commit the query
