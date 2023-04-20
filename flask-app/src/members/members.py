@@ -38,10 +38,10 @@ members = Blueprint('members', __name__)
 
 
 # Get location of restaurant based on city
-@members.route('/restaurants/<city>', methods=['GET'])
-def get_customer(city):
+@members.route('/restaurants/<City>', methods=['GET'])
+def get_customer(City):
     cursor = db.get_db().cursor()
-    cursor.execute('select ResName, City, Street, State, Zip from Restaurants where City = {city}'.format(city))
+    cursor.execute('select ResName, City, Street, StateName, Zip from Restaurants where City = "{city}"'.format(city = City))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -111,6 +111,7 @@ def post_new_photo():
     return "success!"
 
 # Delete friends
+
 
 
 
@@ -187,21 +188,19 @@ def add_rating():
 
     return "success!"
 
-#MemberID,Email,FName,LName,Age,PhoneNumber,City,StateName,NumReviews
 # Edit/Update an email address
-@members.route('/members/<MemberID>', methods=['PUT'])
-def update_email(MemberID):
-
-    #access json data from request object
-    current_app.logger.info('')
-    the_data = request.get_json()
+@members.route('Members/<Email>', methods=['PUT'])
+def update_email(Email):
+    # collecting the data from the request object
+    the_data = request.json
     current_app.logger.info(the_data)
 
+    # extracting the variable
     email = the_data['Email']
 
     # constructing the query
-    query = 'UPDATE Members SET Email = "' + email + '"  WHERE MemberID = "{member_id}"'.format(member_id = MemberID)
-
+    query = 'update Members (Rating) values("'
+    query += Email + ')'
     current_app.logger.info(query)
 
     # execute and commit the query
@@ -209,25 +208,4 @@ def update_email(MemberID):
     cursor.execute(query)
     db.get_db(). commit()
 
-    return "successfully updated!"
-
-
-
-    # # collecting the data from the request object
-    # the_data = request.json
-    # current_app.logger.info(the_data)
-
-    # # extracting the variable
-    # email = the_data['Email']
-
-    # # constructing the query
-    # query = 'update Members (Rating) values("'
-    # query += Email + ')'
-    # current_app.logger.info(query)
-
-    # # execute and commit the query
-    # cursor = db.get_db().cursor()
-    # cursor.execute(query)
-    # db.get_db(). commit()
-
-    # return "success!"
+    return "success!"
