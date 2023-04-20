@@ -36,7 +36,7 @@ Owners
 - List of rewards offered by the restaurant
 
 Members
-- Get location of restaurant based on city
+- Get address of restaurants based on state
 - Get a list of the top ten highest rated restaurants
 - Post a photo of the food
 - Get contact info from the restaurant (PhoneNumber)
@@ -49,5 +49,7 @@ Members
 ## Credits
 @oonafoulser
 @kehsamme
+@smithsrose1
+@sabrinazhouu
 
 
