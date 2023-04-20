@@ -6,7 +6,7 @@ from src import db
 members = Blueprint('members', __name__)
 
 
-# Get location of restaurant based on city
+# Get name and address of restaurant based on city
 @members.route('/restaurants/<City>', methods=['GET'])
 def get_customer(City):
     cursor = db.get_db().cursor()
@@ -53,7 +53,7 @@ def get_10_best_rated():
     return jsonify(json_data)
 
 
-# Post a photo of the food
+# Post a photo of the food for a restaurant
 @members.route('/postPhoto', methods=['POST'])
 def post_new_photo():
 
@@ -63,7 +63,7 @@ def post_new_photo():
     
     # extracting the variable
     r_photo = the_data['Photo']
-    r_id = the_data['Res_ID']
+    r_id = the_data['ResID']
     
     # constructing the query
     insert_statement = 'insert into Photo (Photo, ResID) values ("'
@@ -80,8 +80,6 @@ def post_new_photo():
     return "success!"
 
 # Delete friends
-
-#Delete a Reward 
 @members.route('/friends/<MemberID>', methods =['DELETE'])
 
 def delete_friend(MemberID):
@@ -107,13 +105,8 @@ def delete_friend(MemberID):
     db.get_db().commit()
     return "Successfully deleted!"
 
-    
 
-
-
-
-
-# Get contact info from the restaurant (PhoneNumber) TESTED AND GOOD
+# Get contact info from the restaurant (PhoneNumber)
 @members.route('/Restaurants/<ResName>', methods=['GET'])
 def get_number(ResName):
     cursor = db.get_db().cursor()
@@ -128,7 +121,7 @@ def get_number(ResName):
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get a list of restaurants and their cuisine type, price range, and rating based on city TESTED AND GOOD
+# Get a list of restaurants and their cuisine type, price range, and rating based on city
 @members.route('/resinfo/<City>', methods=['GET'])
 def get_res_info(City):
     cursor = db.get_db().cursor()
@@ -150,7 +143,7 @@ def get_res_info(City):
         json_data.append(dict(zip(column_headers, row)))
     return jsonify(json_data)
 
-# Post a review TESTED AND GOOD
+# Post a review for a restaurant
 @members.route('/Review/', methods=['POST'])
 def add_rating():
     # collecting the data from the request object
