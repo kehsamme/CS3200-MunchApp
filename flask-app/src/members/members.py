@@ -94,12 +94,12 @@ def post_new_photo():
     
     # extracting the variable
     r_photo = the_data['Photo']
-    r_id = the_data['ResID']
+    r_id = the_data['Res_ID']
     
     # constructing the query
-    insert_statement = 'insert into Photos (Photo, ResID) values ("'
-    insert_statement += r_photo + '", "'
-    insert_statement += r_id + ')'
+    insert_statement = 'insert into Photo (Photo, ResID) values ("'
+    insert_statement += r_photo + '", '
+    insert_statement += str(r_id) + ')'
     current_app.logger.info(insert_statement)
     
     # execute and commit the query
