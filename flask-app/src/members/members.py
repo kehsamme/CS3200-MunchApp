@@ -81,6 +81,33 @@ def post_new_photo():
 
 # Delete friends
 
+#Delete a Reward 
+@members.route('/friends/<MemberID>', methods =['DELETE'])
+
+def delete_friend(MemberID):
+
+    #access json data from request object
+    current_app.logger.info('')
+    req_data = request.get_json()
+    current_app.logger.info(req_data)
+    
+    #extracting the variable
+    friend = req_data['Friend']
+       
+    #construct delete statement
+    
+    delete_statement = 'DELETE from Friend where Friend = "'
+    delete_statement += friend + '" AND MemberID = {memID}'.format(memID = MemberID)
+  
+    current_app.logger.info(delete_statement)
+                     
+    #execute query
+    cursor = db.get_db().cursor()
+    cursor.execute(delete_statement)
+    db.get_db().commit()
+    return "Successfully deleted!"
+
+    
 
 
 
