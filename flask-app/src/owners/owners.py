@@ -32,7 +32,7 @@ def delete_code(ResID):
     db.get_db().commit()
     return "Successfully deleted!"
 
-    
+
 #Get a list of customers who’ve reviewed the restaurant and their member info
 @owners.route('/review/<ResID>', methods =['GET'])
 def get_customers(ResID):
@@ -166,7 +166,7 @@ def add_restaurant():
 
 
 # Get a list of competing restaurant 
-@owners.route('/restaurants/<Cuisine>')
+@owners.route('/restaurants/<Cuisine>', methods =['GET'])
 def get_competitor_list(Cuisine):
     cursor = db.get_db().cursor()
     query = 'SELECT ResName, Cuisine, PriceRange, Descriptions, Rating FROM Restaurants WHERE Cuisine = "{cuisine}"'.format(cuisine = Cuisine) + 'ORDER BY rating DESC' 
