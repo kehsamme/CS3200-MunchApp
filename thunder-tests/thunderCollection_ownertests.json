@@ -1,0 +1,273 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Owner Tests",
+    "dateExported": "2023-04-20T00:49:29.979Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "4449ba93-8536-4f27-916d-2878286dd77a",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "add_menu_item_test",
+            "url": "localhost:8001/o/restaurants",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-04-19T16:31:18.525Z",
+            "modified": "2023-04-19T16:31:54.423Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"DishName\" : \"Chicken Dum Biryani\",\n  \"MealType\" : \"Dinner\",\n  \"Price\" : 18,\n  \"ResID\" : 21\n } ",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "4069b9f8-8541-4b07-a32e-baeb4e8a27ea",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "add_menu_item_test2",
+            "url": "localhost:8001/o/restaurants",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-04-19T16:32:12.358Z",
+            "modified": "2023-04-19T16:32:47.687Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"DishName\" : \"Butter Chicken\",\n  \"MealType\" : \"Dinner\",\n  \"Price\" : 12,\n  \"ResID\" : 21\n } ",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "06363c29-4d33-4cf7-9611-a3b50d45b557",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "add_restaurant_test1",
+            "url": "localhost:8001/o/newRestaurant",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-04-19T16:33:21.289Z",
+            "modified": "2023-04-19T16:53:10.190Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"ResID\" : 32,\n  \"ResName\" : \"Desi Delight\",\n  \"OwnerID\" : 32,\n  \"Cuisine\" : \"Indian Cuisine\",\n  \"PriceRange\" : 50,\n  \"PhoneNumber\" : \"732-000-1234\",\n  \"StateName\" : \"New Jersey\",\n  \"City\" : \"East Brunswick\",\n  \"Street\" : \"Independence Dr\",\n  \"Zip\" : 0,\n  \"Descriptions\" : \"Beautiful Indian Restaurant!\",\n  \"Rating\" : 90\n } ",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "e8dc47f5-deaf-48d5-8dba-585a16d7d2d7",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "add_restaurant_test2",
+            "url": "localhost:8001/o/newRestaurant",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2023-04-19T16:56:59.190Z",
+            "modified": "2023-04-19T16:57:42.241Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"ResID\" : 34,\n  \"ResName\" : \"Amma's Kitchen\",\n  \"OwnerID\" : 34,\n  \"Cuisine\" : \"Indian Cuisine\",\n  \"PriceRange\" : 25,\n  \"PhoneNumber\" : \"732-222-1234\",\n  \"StateName\" : \"New Jersey\",\n  \"City\" : \"Edison\",\n  \"Street\" : \"Oak Tree Dr\",\n  \"Zip\" : 2,\n  \"Descriptions\" : \"Wonderful Indian Restaurant!\",\n  \"Rating\" : 82\n } ",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "3bfddbad-e26f-4159-8d27-82c54c9e1cd7",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "get_rewards",
+            "url": "localhost:8001/o/rewards/1",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-04-19T16:58:22.429Z",
+            "modified": "2023-04-19T17:06:12.639Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d65e6dc8-9600-4e4a-9557-8b97e202663b",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "get_rewards_test2",
+            "url": "localhost:8001/o/rewards/3",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-04-19T17:06:36.244Z",
+            "modified": "2023-04-19T17:06:44.959Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "90b8096b-5f6e-49a1-b09b-04b3e3045a3c",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "edit_ownership_test1",
+            "url": "localhost:8001/o/owners/1",
+            "method": "PUT",
+            "sortNum": 90000,
+            "created": "2023-04-19T17:07:41.245Z",
+            "modified": "2023-04-19T17:45:45.623Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"OwnerID\" : 2,\n  \"FName\" : \"Smeef\",\n  \"LName\" : \"Beef\",\n  \"Age\" : 21,\n  \"YearsOwner\" : 2,\n  \"Gender\" : \"Female\" \n } ",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "8adca0ac-c7f3-4dcd-a703-ae3467e2d965",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "edit_ownership_test2",
+            "url": "localhost:8001/o/owners/2",
+            "method": "PUT",
+            "sortNum": 100000,
+            "created": "2023-04-19T17:48:27.860Z",
+            "modified": "2023-04-19T17:50:33.553Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"OwnerID\" : 3,\n  \"FName\" : \"GymBro\",\n  \"LName\" : \"Broski\",\n  \"Age\" : 24,\n  \"YearsOwner\" : 2,\n  \"Gender\" : \"Male\" \n } ",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "a8921f90-2903-45a2-b8be-e785ffb5971a",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "get_competitor_list",
+            "url": "localhost:8001/o/restaurants/French Cuisine",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-04-19T18:22:39.377Z",
+            "modified": "2023-04-19T18:28:16.877Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b504e484-44d6-4ff5-a4b5-574b3fd73925",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "get_competitor_list_test2",
+            "url": "localhost:8001/o/restaurants/Indian Cuisine",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2023-04-19T18:36:43.210Z",
+            "modified": "2023-04-19T18:36:57.801Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "00969a73-821e-42f3-aa37-88ba7a5a4d95",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "get_reviews_test1",
+            "url": "localhost:8001/o/resReviews/1",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-04-19T18:38:39.646Z",
+            "modified": "2023-04-19T18:59:14.194Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3c37af18-094e-4b8a-aa85-0ad893f5756b",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "get_reviews_test2",
+            "url": "localhost:8001/o/resReviews/2",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2023-04-19T19:14:41.600Z",
+            "modified": "2023-04-19T19:41:25.097Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a3e4680e-42c9-4a27-83b1-0154a32d477e",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "get_customers_reviewed_test1",
+            "url": "localhost:8001/o/review/1",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2023-04-19T19:30:26.588Z",
+            "modified": "2023-04-19T19:41:51.616Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "7ec59255-2182-45c9-a85e-9ff64d170d6a",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "get_customers_reviewed_test2",
+            "url": "localhost:8001/o/review/4",
+            "method": "GET",
+            "sortNum": 160000,
+            "created": "2023-04-19T19:48:40.558Z",
+            "modified": "2023-04-20T00:45:08.024Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "50d7b179-bcb1-4110-9286-cc52971ca425",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "delete_reward",
+            "url": "localhost:8001/o/Rewards/2",
+            "method": "DELETE",
+            "sortNum": 170000,
+            "created": "2023-04-20T00:07:20.091Z",
+            "modified": "2023-04-20T00:08:44.295Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"PromoCode\" : \"Y43194\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "07f38625-5466-40ef-b662-4d246f03a5c7",
+            "colId": "6a2f50b2-18a6-4c83-acbc-6f933eddfa14",
+            "containerId": "",
+            "name": "delete_reward_test2",
+            "url": "localhost:8001/o/Rewards/8",
+            "method": "DELETE",
+            "sortNum": 180000,
+            "created": "2023-04-20T00:13:33.137Z",
+            "modified": "2023-04-20T00:14:04.783Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"PromoCode\" : \"5F0610\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
