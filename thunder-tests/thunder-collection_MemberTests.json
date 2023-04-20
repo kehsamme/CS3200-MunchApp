@@ -1,0 +1,85 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "MemberTests",
+    "dateExported": "2023-04-20T17:35:23.551Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "9b02439f-c06a-4479-b5e2-476cac7605d1",
+            "colId": "38d311be-3ed8-4c85-810e-a72075f45f75",
+            "containerId": "",
+            "name": "delete_friend",
+            "url": "localhost:8001/m/friends/1",
+            "method": "DELETE",
+            "sortNum": 10000,
+            "created": "2023-04-20T16:29:01.726Z",
+            "modified": "2023-04-20T16:30:29.400Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Friend\" : \"Cyndia Chittim\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "37a3bbc2-591f-4262-89dd-65c5767b20ce",
+            "colId": "38d311be-3ed8-4c85-810e-a72075f45f75",
+            "containerId": "",
+            "name": "delete_friend_test2",
+            "url": "localhost:8001/m/friends/2",
+            "method": "DELETE",
+            "sortNum": 15000,
+            "created": "2023-04-20T17:34:30.578Z",
+            "modified": "2023-04-20T17:35:11.494Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Friend\" : \"Annaliese Bartomieu\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f6cbb36e-2da3-42fa-a1de-052a62bea813",
+            "colId": "38d311be-3ed8-4c85-810e-a72075f45f75",
+            "containerId": "",
+            "name": "update_email",
+            "url": "localhost:8001/m/memberEmail/1",
+            "method": "PUT",
+            "sortNum": 20000,
+            "created": "2023-04-20T17:28:18.239Z",
+            "modified": "2023-04-20T17:30:38.441Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Email\" : \"smeefBEEF@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "b733e66f-cab5-4b3f-9a20-dd39fa89eae3",
+            "colId": "38d311be-3ed8-4c85-810e-a72075f45f75",
+            "containerId": "",
+            "name": "update_email_test2",
+            "url": "localhost:8001/m/memberEmail/2",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2023-04-20T17:33:49.695Z",
+            "modified": "2023-04-20T17:34:18.553Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Email\" : \"hihello@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

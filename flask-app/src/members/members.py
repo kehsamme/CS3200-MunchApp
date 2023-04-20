@@ -180,8 +180,8 @@ def add_rating():
     return "success!"
 
 # Edit/Update an email address
-@members.route('Members/<Email>', methods=['PUT'])
-def update_email(Email):
+@members.route('/memberEmail/<MemberID>', methods=['PUT'])
+def update_email(MemberID):
     # collecting the data from the request object
     the_data = request.json
     current_app.logger.info(the_data)
@@ -190,8 +190,8 @@ def update_email(Email):
     email = the_data['Email']
 
     # constructing the query
-    query = 'update Members (Rating) values("'
-    query += Email + ')'
+    query = 'UPDATE Members SET Email = "'
+    query += email + '" WHERE MemberID = {memID}'.format(memID = MemberID)
     current_app.logger.info(query)
 
     # execute and commit the query
