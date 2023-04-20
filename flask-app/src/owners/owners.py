@@ -127,7 +127,7 @@ def add_restaurant():
     req_data = request.get_json()
     current_app.logger.info(req_data)
     
-    res_id = req_data['ResID']
+    res_id = req_data['RestID']
     res_name = req_data['ResName']
     owner_id = req_data['OwnerID'] 
     cuisine = req_data['Cuisine']
@@ -199,7 +199,7 @@ def edit_ownership(OwnerID):
     req_data = request.get_json()
     current_app.logger.info(req_data)
     
-    owner_id = req_data['OwnerID']
+    owner_id = req_data['Owner_ID']
     first = req_data['FName']
     last = req_data['LName']
     age = req_data['Age']
