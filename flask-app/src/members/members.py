@@ -63,7 +63,7 @@ def post_new_photo():
     
     # extracting the variable
     r_photo = the_data['Photo']
-    r_id = the_data['ResID']
+    r_id = the_data['Res_ID']
     
     # constructing the query
     insert_statement = 'insert into Photo (Photo, ResID) values ("'
