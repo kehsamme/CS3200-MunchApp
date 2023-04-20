@@ -17,12 +17,13 @@ def delete_code(ResID):
     current_app.logger.info(req_data)
     
     #extracting the variable
-    p_code = req_data['PromoCode']
+    promo_code = req_data['PromoCode']
        
-    #construct insert statement
+    #construct delete statement
     
-    delete_statement = 'DELETE from Rewards where PromoCode = {p_code}'
-                     
+    delete_statement = 'DELETE from Rewards where PromoCode = "'
+    delete_statement += promo_code + '" AND ResID = {resID}'.format(resID = ResID)
+  
     current_app.logger.info(delete_statement)
                      
     #execute query
@@ -36,10 +37,14 @@ def delete_code(ResID):
 @owners.route('/review/<ResID>', methods =['GET'])
 def get_customers(ResID):
     cursor = db.get_db().cursor()
-    query = 'select Review.MemberID, Restaurants.ResID\
-                 from (Restaurants join Review) where Restaurants.ResID = "{resID}"'.format(resID=ResID)
-    cursor.execute('select MemberID, Email, FName, LName, Age, Members.PhoneNumber, Members.City, Members.StateName, NumReviews ' + 
-                   'from Members join ' + query + ' on Members.MemberID = Review.MemberID')
+#MemberID, Email, FName, LName, Age, Members.PhoneNumber, Members.City, Members.StateName, NumReviews ' 
+
+    query = 'select Review.MemberID, Email, FName, LName, Age, PhoneNumber, City, StateName, NumReviews\
+           from Members join Review on Review.MemberID= Members.MemberID \
+            where Review.ResID = "{resID}"'.format(resID=ResID)
+
+    #'select Review.MemberID, Email, FName, LName, Age, PhoneNumber, City, StateName, NumReviews, Review.ResID from Members join Review on Review.MemberID= Members.MemberID'
+    cursor.execute(query)
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
