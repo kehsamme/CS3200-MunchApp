@@ -27,9 +27,9 @@ def get_customer(City):
 def get_10_best_rated():
 
     query = '''
-        SELECT ResName, Cuisine, PriceRange, City, Descriptions
+        SELECT Rating, ResName, Cuisine, PriceRange, City, Descriptions
         FROM Restaurants
-        ORDER BY Rating
+        ORDER BY Rating DESC
         LIMIT 10
     '''
 
