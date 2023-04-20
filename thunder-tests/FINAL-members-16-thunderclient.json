@@ -1,0 +1,278 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "members tests",
+    "dateExported": "2023-04-20T18:40:50.187Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "df0a0876-f7e9-4881-a214-85665560353f",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testNumber",
+            "url": "localhost:8001/m/Restaurants/Dynazzy",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-04-19T01:49:12.323Z",
+            "modified": "2023-04-19T14:11:55.971Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "12854822-1df2-4547-adfb-3f295ac50bb5",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testNumber2",
+            "url": "localhost:8001/m/Restaurants/Jatri",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-04-19T14:42:31.139Z",
+            "modified": "2023-04-19T14:42:33.721Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d3f59b64-d061-460a-b41d-41bd24d7863f",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testTopTen",
+            "url": "localhost:8001/m/tenBestRated",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-04-19T14:43:09.791Z",
+            "modified": "2023-04-19T14:43:51.659Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "edc0b4d1-9009-4235-806a-511020e05919",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testCityCuisine",
+            "url": "localhost:8001/m/resinfo/Pittsburgh",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-04-19T14:50:21.470Z",
+            "modified": "2023-04-19T16:34:49.075Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6668a1b2-6313-4aff-a970-4ca28cd90da1",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testCityCuisine2",
+            "url": "localhost:8001/m/resinfo/Oklahoma City",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-04-19T16:42:22.019Z",
+            "modified": "2023-04-19T16:42:48.982Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e4db48e0-ba48-46b4-bc26-06717a73f1cd",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testPostRating",
+            "url": "localhost:8001/m/Review",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-04-19T17:24:16.413Z",
+            "modified": "2023-04-20T18:18:49.328Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Stars\" : 5,\n  \"ReviewDescription\" : \"test for post rating\",\n  \"MemberID\" : 8,\n  \"ResID\" : 12\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "65afef2b-747f-4ecc-9dc5-7163fb98d62a",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testPostRating2",
+            "url": "localhost:8001/m/Review",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2023-04-19T19:04:03.247Z",
+            "modified": "2023-04-19T19:05:26.128Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Stars\" : 3,\n  \"ReviewDescription\" : \"another test for post rating\",\n  \"MemberID\" : 12,\n  \"ResID\" : 18\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "6e11f42b-49ba-433f-90cd-a9289e3d7cfa",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testEditEmail",
+            "url": "localhost:8001/m/memberEmail/1",
+            "method": "PUT",
+            "sortNum": 100000,
+            "created": "2023-04-19T19:17:55.642Z",
+            "modified": "2023-04-20T17:38:56.364Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Email\" : \"hottie@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "5bfcf2a8-f56e-42c1-bd75-54dfde86ecf7",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testEditEmail2",
+            "url": "localhost:8001/m/memberEmail/28",
+            "method": "PUT",
+            "sortNum": 120000,
+            "created": "2023-04-20T18:01:46.427Z",
+            "modified": "2023-04-20T18:02:37.002Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Email\" : \"test@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9ec6f546-895b-4f3b-82c0-1786c77c80dc",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testResLoc",
+            "url": "localhost:8001/m/restaurants/Los Angeles",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-04-20T18:08:07.353Z",
+            "modified": "2023-04-20T18:09:05.236Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "4f7cf16d-1e13-4d91-b43d-aee163775dc1",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testResLoc2",
+            "url": "localhost:8001/m/restaurants/Jacksonville",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2023-04-20T18:09:21.939Z",
+            "modified": "2023-04-20T18:09:43.720Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3c51b93f-1063-4178-8acb-354cb3c40c58",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testPostPic",
+            "url": "localhost:8001/m/postPhoto",
+            "method": "POST",
+            "sortNum": 150000,
+            "created": "2023-04-20T18:10:24.373Z",
+            "modified": "2023-04-20T18:18:52.550Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Photo\" : \"http://dummyimage.com/112x100.png/ff4444/ssss\",\n  \"ResID\" : \"22\"\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "56e4c196-4b84-484b-87d0-42307ae8207c",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testPostPic2",
+            "url": "localhost:8001/m/postPhoto",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2023-04-20T18:25:53.882Z",
+            "modified": "2023-04-20T18:26:30.949Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Photo\" : \"http://testpic.com\",\n  \"ResID\" : \"12\"\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "fc2fa138-f751-4549-961b-31ef741699ed",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testPostPic3",
+            "url": "localhost:8001/m/postPhoto",
+            "method": "POST",
+            "sortNum": 170000,
+            "created": "2023-04-20T18:26:51.328Z",
+            "modified": "2023-04-20T18:27:17.386Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Photo\" : \"does it have to be a url or just a string?\",\n  \"ResID\" : \"2\"\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0332794c-d182-4dc9-baed-9df79a13af31",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testDeleteFriend",
+            "url": "localhost:8001/m/friends/8",
+            "method": "DELETE",
+            "sortNum": 180000,
+            "created": "2023-04-20T18:31:11.873Z",
+            "modified": "2023-04-20T18:34:18.755Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Friend\" : \"Ray Alflat\",\n  \"MemberID\" : 8\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "2a18d62c-9748-4fcb-86e9-91b33722d294",
+            "colId": "d9283ad9-5e9b-4ad3-9812-9df3464b4e04",
+            "containerId": "",
+            "name": "testDeleteFriend2",
+            "url": "localhost:8001/m/friends/16",
+            "method": "DELETE",
+            "sortNum": 190000,
+            "created": "2023-04-20T18:34:47.511Z",
+            "modified": "2023-04-20T18:35:28.975Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Friend\" : \"Nan Yglesia\",\n  \"MemberID\" : 16\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
